@@ -6,4 +6,7 @@ import study.software.architecture.person.entities.Person;
 import java.util.UUID;
 
 public interface PersonRepository extends JpaRepository<Person, UUID> {
+
+    Person findByDocument(String document);
+
 }

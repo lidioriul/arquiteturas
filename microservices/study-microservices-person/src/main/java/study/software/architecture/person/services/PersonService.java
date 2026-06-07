@@ -6,6 +6,7 @@ import study.software.architecture.person.entities.Person;
 import study.software.architecture.person.entities.PersonConverter;
 import study.software.architecture.person.repositories.PersonRepository;
 import study.software.architecture.person.to.PersonRequest;
+import study.software.architecture.person.to.PersonResponse;
 
 @Service
 public class PersonService {
@@ -17,8 +18,13 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public Person save(PersonRequest personRequest) {
+    public PersonResponse save(PersonRequest personRequest) {
         Person person = PersonConverter.toEntity(personRequest);
-        return personRepository.save(person);
+        Person personSaved = personRepository.save(person);
+        return PersonConverter.toResponse(personSaved);
+    }
+
+    public PersonResponse findByDocument(String document) {
+        return PersonConverter.toResponse(personRepository.findByDocument(document));
     }
 }
